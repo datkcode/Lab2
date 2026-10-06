@@ -84,7 +84,15 @@ if not exist "%BUILD_DIR%\Makefile" if not exist "%BUILD_DIR%\build.ninja" (
 cmake --build "%BUILD_DIR%"
 if errorlevel 1 goto BUILD_ERROR
 
-:: Trường hợp tên file HEX đầu ra khác với TARGET_NAME, tự động tìm file .hex trong build/
+:: Tự động tạo file .hex từ .elf nếu chưa có
+if not exist "%HEX_FILE%" (
+    if exist "%BUILD_DIR%\%TARGET_NAME%.elf" (
+        echo [INFO] Generating HEX file from ELF...
+        arm-none-eabi-objcopy -O ihex "%BUILD_DIR%\%TARGET_NAME%.elf" "%HEX_FILE%"
+    )
+)
+
+:: Trường hợp tên file HEX đầu ra khác với TARGET_NAME, tự động quét file .hex trong build/
 if not exist "%HEX_FILE%" (
     for /r "%BUILD_DIR%" %%F in (*.hex) do (
         set "HEX_FILE=%%F"
@@ -92,7 +100,10 @@ if not exist "%HEX_FILE%" (
     )
 )
 
-if not exist "%HEX_FILE%" goto BUILD_ERROR
+if not exist "%HEX_FILE%" (
+    echo [ERROR] Cannot find or generate %HEX_FILE%
+    goto BUILD_ERROR
+)
 
 :: Đồng bộ file HEX ra thư mục gốc
 copy /y "%HEX_FILE%" "%HEX_ROOT%" >nul
@@ -104,7 +115,6 @@ echo.
 echo [2/3] SUCCESS: Firmware compiled successfully!
 echo       HEX file updated: "%HEX_FILE%"
 echo.
-
 :: -----------------------------------------------------
 :: 4. RELOAD OR LAUNCH PROTEUS
 :: -----------------------------------------------------

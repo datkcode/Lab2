@@ -1,0 +1,6 @@
+D:/DAI_HOC/Uni3/VXL-VDK/Project_new/Lab2/build/CMakeFiles/Lab2.dir
+D:/DAI_HOC/Uni3/VXL-VDK/Project_new/Lab2/build/CMakeFiles/edit_cache.dir
+D:/DAI_HOC/Uni3/VXL-VDK/Project_new/Lab2/build/CMakeFiles/rebuild_cache.dir
+D:/DAI_HOC/Uni3/VXL-VDK/Project_new/Lab2/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
+D:/DAI_HOC/Uni3/VXL-VDK/Project_new/Lab2/build/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+D:/DAI_HOC/Uni3/VXL-VDK/Project_new/Lab2/build/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
