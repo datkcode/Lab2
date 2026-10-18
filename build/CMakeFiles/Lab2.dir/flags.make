@@ -7,11 +7,11 @@ ASM_DEFINES = -DDEBUG -DSTM32F103x6 -DUSE_HAL_DRIVER
 
 ASM_INCLUDES = -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Core\Inc -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\STM32F1xx_HAL_Driver\Inc -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\CMSIS\Include
 
-ASM_FLAGS =  -mcpu=cortex-m3  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m3  -x assembler-with-cpp -MMD -MP -g
+ASM_FLAGS =  -mcpu=cortex-m3  -x assembler-with-cpp -MMD -MP -g
 
 C_DEFINES = -DDEBUG -DSTM32F103x6 -DUSE_HAL_DRIVER
 
 C_INCLUDES = -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Core\Inc -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\STM32F1xx_HAL_Driver\Inc -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include -ID:\DAI_HOC\Uni3\VXL-VDK\Project_new\Lab2\cmake\stm32cubemx\..\..\Drivers\CMSIS\Include
 
-C_FLAGS =  -mcpu=cortex-m3  -Wall -fdata-sections -ffunction-sections -fstack-usage -mcpu=cortex-m3  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
+C_FLAGS =  -mcpu=cortex-m3  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11
 
