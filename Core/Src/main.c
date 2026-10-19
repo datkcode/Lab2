@@ -155,6 +155,14 @@ void setTimer2(int duration){
   timer2_counter = duration/TIME_CYCLE;
   timer2_flag = 0;
 }
+// Software Timer 3
+int timer3_counter = 0;
+int timer3_flag = 0;
+
+void setTimer3(int duration) {
+    timer3_counter = duration / TIME_CYCLE;
+    timer3_flag = 0;
+}
 void timer_run(){
   if (timer0_counter > 0){
     timer0_counter--;
@@ -173,6 +181,10 @@ void timer_run(){
     if (timer2_counter == 0){
       timer2_flag = 1;
     }
+  }
+  if (timer3_counter > 0) {
+      timer3_counter--;
+      if (timer3_counter == 0) timer3_flag = 1;
   }
 }
 
@@ -230,6 +242,13 @@ void updateLEDMatrix(int index){
     }
 }
 
+// shift matrix
+void shiftLeftMatrix_RowBased(void) {
+    for (int i = 0; i < MAX_LED_MATRIX; i++) {
+        matrix_buffer[i] = (uint8_t)((matrix_buffer[i] << 1) | (matrix_buffer[i] >> 7));
+    }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -276,6 +295,7 @@ int main(void)
   setTimer0(1000);
   setTimer1(250);
   setTimer2(20);
+  setTimer3(100);
   while (1) {
     if (timer0_flag == 1){
       setTimer0(1000);
@@ -310,6 +330,10 @@ int main(void)
         index_led_matrix = 0;
       }
     }
+    if (timer3_flag == 1) {
+          setTimer3(100);
+          shiftLeftMatrix_RowBased(); 
+      }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
