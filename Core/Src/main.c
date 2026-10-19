@@ -133,19 +133,34 @@ void updateClockBuffer(){
   led_buffer[3] = minute % 10;
 }
 
+//Time Cycle
+int TIME_CYCLE = 10;
+// Software Timer 0
 int timer0_counter = 0;
 int timer0_flag = 0;
-int TIME_CYCLE = 10;
 void setTimer0 (int duration){
   timer0_counter = duration/TIME_CYCLE;
   timer0_flag = 0;
 }
+// Software Timer 1
+int timer1_counter = 0;
+int timer1_flag = 0;
+void setTimer1 (int duration){
+  timer1_counter = duration/TIME_CYCLE;
+  timer1_flag = 0;
+}
 void timer_run(){
   if (timer0_counter > 0){
     timer0_counter--;
+    if (timer0_counter == 0){
+      timer0_flag = 1;
+    }
   }
-  if (timer0_counter == 0){
-    timer0_flag = 1;
+  if (timer1_counter > 0){
+    timer1_counter--;
+    if (timer1_counter == 0){
+      timer1_flag = 1;
+    }
   }
 }
 
@@ -192,6 +207,7 @@ int main(void) {
   /* USER CODE BEGIN WHILE */
   updateClockBuffer();
   setTimer0(1000);
+  setTimer1(250);
   while (1) {
     if (timer0_flag == 1){
       setTimer0(1000);
@@ -209,6 +225,14 @@ int main(void) {
         hour = 0;
       }
       updateClockBuffer();
+    }
+    if (timer1_flag == 1){
+      setTimer1(250);
+      update7SEG(index_led);
+      index_led++;
+      if (index_led >= MAX_LED){
+        index_led = 0;
+      }
     }
     /* USER CODE END WHILE */
 
@@ -344,16 +368,6 @@ static void MX_GPIO_Init(void) {
 int counter = 25;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   timer_run();
-  if (htim->Instance == TIM2) {
-    counter--;
-    if (counter <= 0){
-      counter = 25;
-      update7SEG(index_led++);
-      if (index_led == MAX_LED){
-        index_led = 0;
-      }
-    }
-  }
 }
 /* USER CODE END 4 */
 
